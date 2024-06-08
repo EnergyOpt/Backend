@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from db.models import Machine
+from db.models import Machine,MachineData
 from pydantic import BaseModel
 
 
@@ -38,8 +38,12 @@ def get_all_machines():
 
 
 @app.post("/machine/input/")
-def machine_input():
-    pass
+def machine_input(machine_input:MachineData):
+    print(MachineData.add_stream_data(machine_input.model_dump()))
+
+
+    return machine_input.model_dump()
+    
 
 
 @app.get("/machine/data/")
